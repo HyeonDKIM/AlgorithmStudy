@@ -1,1 +1,1 @@
-jap
+algorithm study
