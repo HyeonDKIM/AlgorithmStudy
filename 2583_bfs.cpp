@@ -4,7 +4,8 @@
 #include <algorithm>
 using namespace std;
 
-//11724번 연결 요소의 개수
+//2583번 영역 구하기
+
 int matrix[100][100];
 int visited[100][100];
 int M, N, K;
