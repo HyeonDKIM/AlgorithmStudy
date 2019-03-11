@@ -1,0 +1,60 @@
+#include<iostream>
+#include<algorithm>
+#include<cstdio>
+using namespace std;
+
+int n, m, a, b;
+int UnionNum;
+int IndexArr[1000001];
+
+
+//부모 가져오기
+int GetParent(int parent[], int x) {
+	if (parent[x] == x) return parent[x];
+	return parent[x] = GetParent(parent, parent[x]);
+}
+
+//부모 가져와서 합집합인지 아닌지 판별
+int UnionOrNot(int parent[], int a, int b) {
+	a = GetParent(parent, a);
+	b = GetParent(parent, b);
+
+	if (a == b) return 1;
+	else return 0;
+}
+
+//합집합 만들기
+void MakeUnion(int parent[], int a, int b) {
+	a = GetParent(parent, a);
+	b = GetParent(parent, b);
+	if (a < b)
+		parent[b] = a;
+	else parent[a] = b;
+}
+
+int main() {
+
+	scanf_s("%d %d", &n, &m);
+
+	//배열에 값 할당
+	for (int i = 0; i <= n; i++) {
+		IndexArr[i] = i;
+	}
+
+	for (int i = 0; i < m; i++) {
+		scanf_s("%d %d %d", &UnionNum, &a, &b);
+
+		//합집합 만들기
+		if (UnionNum == 0) {
+			MakeUnion(IndexArr,a, b);
+		}
+
+		//합집합인지 확인
+		else if (UnionNum == 1) {
+			if (UnionOrNot(IndexArr, a, b) == 1)
+				printf("YES\n");
+			else
+				printf("NO\n");
+		}
+	}
+}
